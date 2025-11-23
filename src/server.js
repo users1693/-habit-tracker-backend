@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3000;
 const allowedOrigins = [
   "http://localhost:3001",
   "http://localhost:3000",
-  "https://YOUR_GITHUB_USERNAME.github.io", // ← We'll update this
+  "https://users1693.github.io", // ← Add this line!
 ];
 
 app.use(
