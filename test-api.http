@@ -1,0 +1,134 @@
+@baseUrl = http://localhost:3000
+@userId = 79cd0384-650a-4489-8962-8e81804ba36b
+@habitId = ab176dcc-d9de-4800-a44a-3c806a071c55
+
+### 1. Register User
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "gamer123",
+  "email": "gamer@example.com",
+  "password": "password123",
+  "timezone": "America/New_York"
+}
+
+### 2. Login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "gamer@example.com",
+  "password": "password123"
+}
+
+### 3. Create a Good Habit
+POST {{baseUrl}}/api/habits
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "name": "Morning Workout",
+  "type": "GOOD",
+  "baseXpValue": 50,
+  "targetCount": 1
+}
+
+### 4. Create a Bad Habit
+POST {{baseUrl}}/api/habits
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "name": "Eating Junk Food",
+  "type": "BAD",
+  "baseXpValue": 30,
+  "targetCount": 1
+}
+
+### 5. Get All Habits
+GET {{baseUrl}}/api/habits?userId={{userId}}
+
+### 6. Complete a Good Habit (Earn XP!)
+POST {{baseUrl}}/api/completions/increment
+Content-Type: application/json
+
+{
+  "habitId": "{{habitId}}",
+  "userId": "{{userId}}"
+}
+
+### 7. Complete it Again (Multi-completion)
+POST {{baseUrl}}/api/completions/increment
+Content-Type: application/json
+
+{
+  "habitId": "{{habitId}}",
+  "userId": "{{userId}}"
+}
+
+### 8. Get Today's Completions
+GET {{baseUrl}}/api/completions/today?userId={{userId}}
+
+### 9. Get User Stats (Should Show XP & Level)
+GET {{baseUrl}}/api/user/{{userId}}/stats
+
+### 10. Undo a Completion (Remove XP)
+POST {{baseUrl}}/api/completions/decrement
+Content-Type: application/json
+
+{
+  "habitId": "{{habitId}}",
+  "userId": "{{userId}}"
+}
+
+### 11. Check Stats Again
+GET {{baseUrl}}/api/user/{{userId}}/stats
+
+### Check reset status for all users
+GET http://localhost:3000/api/admin/reset-status
+
+### Manually trigger timezone-aware reset
+POST http://localhost:3000/api/admin/reset
+
+### Manually reset specific user
+POST http://localhost:3000/api/admin/reset/{{userId}}
+
+### Register user in Tokyo (UTC+9)
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "tokyo_user",
+  "email": "tokyo@example.com",
+  "password": "password123",
+  "timezone": "Asia/Tokyo"
+}
+
+### Register user in New York (UTC-5)
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "nyc_user",
+  "email": "nyc@example.com",
+  "password": "password123",
+  "timezone": "America/New_York"
+}
+
+### Register user in London (UTC+0)
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "london_user",
+  "email": "london@example.com",
+  "password": "password123",
+  "timezone": "Europe/London"
+}
+
+### Check reset status - see different local times!
+GET http://localhost:3000/api/admin/reset-status
+```
+
+---
