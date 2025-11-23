@@ -17,10 +17,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // CORS configuration for production
+// CORS configuration for production
 const allowedOrigins = [
   "http://localhost:3001",
   "http://localhost:3000",
-  "https://users1693.github.io", // ← Add this line!
+  "https://users1693.github.io", // ← Add this!
 ];
 
 app.use(

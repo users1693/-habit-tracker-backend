@@ -1,7 +1,10 @@
 // src/services/api.js
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL || "http://localhost:3000/api";
+
+console.log("API Base URL:", API_BASE_URL); // Helpful for debugging
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -10,6 +13,7 @@ const api = axios.create({
   },
 });
 
+// ... rest of your api.js file stays the same
 // Auth
 export const register = async (userData) => {
   const response = await api.post("/auth/register", userData);
